@@ -1,88 +1,795 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KesavaRam & Nivetha - Wedding Logo</title>
+    <title>Nivetha & KesavaRam - Wedding Invitation</title>
+    
+    <link rel="icon" href="https://www.image2url.com/r2/default/files/1776065713562-dea899e2-070e-4caf-8733-fff4e68eda2d.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://www.image2url.com/r2/default/files/1776065713562-dea899e2-070e-4caf-8733-fff4e68eda2d.png">
+    
+    <meta property="og:title" content="Nivetha & KesavaRam - Wedding Invitation">
+    <meta property="og:description" content="You are cordially invited to celebrate the wedding of Nivetha & KesavaRam. Join us on our special day!">
+    <meta property="og:image" content="https://www.image2url.com/r2/default/files/1776065713562-dea899e2-070e-4caf-8733-fff4e68eda2d.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: 'rgb(92, 32, 24)',
+                        bgLight: '#FCFBF9',
+                    },
+                    fontFamily: {
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                    },
+                    letterSpacing: {
+                        'widest-xl': '0.2em',
+                        'widest-2xl': '0.25em',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #e5e5e5;
-            font-family: 'Georgia', serif;
-            margin: 0;
-            padding: 20px;
+            background-color: #FCFBF9;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        .logo-container {
+
+        @keyframes bounce-subtle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(5px);
+            }
+        }
+
+        .animate-bounce-subtle {
+            animation: bounce-subtle 2s infinite ease-in-out;
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .glass-pill:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .scratch-container {
+            border: 6px solid #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        canvas.scratch-canvas {
+            touch-action: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-transition {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* --- SCROLL ANIMATIONS --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO CURTAIN ANIMATION --- */
+        .hero-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.5, 0, 0, 1), transform 1.2s cubic-bezier(0.5, 0, 0, 1);
+            will-change: opacity, transform;
+        }
+
+        .hero-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+
+        .delay-500 {
+            transition-delay: 500ms;
+        }
+
+        /* Scalloped edge effect for Thank You section */
+        .scallop-border {
             background: white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .instructions {
-            margin-top: 30px;
-            text-align: center;
-            color: #444;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-        h2 {
-            color: rgb(92, 32, 24);
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 0 12px white;
+            clip-path: polygon(100% 0%, 100% 5%, 98% 8%, 100% 11%, 98% 14%, 100% 17%, 98% 20%, 100% 23%, 98% 26%, 100% 29%, 98% 32%, 100% 35%, 98% 38%, 100% 41%, 98% 44%, 100% 47%, 98% 50%, 100% 53%, 98% 56%, 100% 59%, 98% 62%, 100% 65%, 98% 68%, 100% 71%, 98% 74%, 100% 77%, 98% 80%, 100% 83%, 98% 86%, 100% 89%, 98% 92%, 100% 95%, 100% 100%, 95% 100%, 92% 98%, 89% 100%, 86% 98%, 83% 100%, 80% 98%, 77% 100%, 74% 98%, 71% 100%, 68% 98%, 65% 100%, 62% 98%, 59% 100%, 56% 98%, 53% 100%, 50% 98%, 47% 100%, 44% 98%, 41% 100%, 38% 98%, 35% 100%, 32% 98%, 29% 100%, 26% 98%, 23% 100%, 20% 98%, 17% 100%, 14% 98%, 11% 100%, 8% 98%, 5% 100%, 0% 100%, 0% 95%, 2% 92%, 0% 89%, 2% 86%, 0% 83%, 2% 80%, 0% 77%, 2% 74%, 0% 71%, 2% 68%, 0% 65%, 2% 62%, 0% 59%, 2% 56%, 0% 53%, 2% 50%, 0% 47%, 2% 44%, 0% 41%, 2% 38%, 0% 35%, 2% 32%, 0% 29%, 2% 26%, 0% 23%, 2% 20%, 0% 17%, 2% 14%, 0% 11%, 2% 8%, 0% 5%, 0% 0%, 5% 0%, 8% 2%, 11% 0%, 14% 2%, 17% 0%, 20% 2%, 23% 0%, 26% 2%, 29% 0%, 32% 2%, 35% 0%, 38% 2%, 41% 0%, 44% 2%, 47% 0%, 50% 2%, 53% 0%, 56% 2%, 59% 0%, 62% 2%, 65% 0%, 68% 2%, 71% 0%, 74% 2%, 77% 0%, 80% 2%, 83% 0%, 86% 2%, 89% 0%, 92% 2%, 95% 0%);
         }
     </style>
 </head>
-<body>
 
-    <div class="logo-container">
-        <!-- Elegant Wedding Logo SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="400" height="400">
-            <!-- Background -->
-            <rect width="800" height="800" fill="#FCFBF9" rx="40"/>
-            
-            <!-- Outer Decorative Borders -->
-            <circle cx="400" cy="400" r="350" fill="none" stroke="#5C2018" stroke-width="4"/>
-            <circle cx="400" cy="400" r="330" fill="none" stroke="#5C2018" stroke-width="2" stroke-dasharray="12, 15"/>
-            
-            <!-- Decorative Top Element -->
-            <path d="M 400 90 C 430 90, 440 115, 400 140 C 360 115, 370 90, 400 90 Z" fill="#5C2018" opacity="0.9"/>
-            <circle cx="400" cy="165" r="6" fill="#a98f89"/>
-            <circle cx="400" cy="190" r="4" fill="#a98f89"/>
-            
-            <!-- Main Monogram -->
-            <text x="400" y="400" font-family="Georgia, serif" font-size="190" font-style="italic" font-weight="bold" fill="#5C2018" text-anchor="middle">
-                K<tspan font-size="95" dy="-40" fill="#a98f89">&amp;</tspan>N
-            </text>
-            
-            <!-- Names (Positioned higher to fit perfectly inside the circle) -->
-            <text x="400" y="530" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#5C2018" text-anchor="middle" letter-spacing="4">
-                KESAVARAM &amp; NIVETHA
-            </text>
-            
-            <!-- Date -->
-            <text x="400" y="585" font-family="Georgia, serif" font-size="22" fill="#a98f89" text-anchor="middle" letter-spacing="4" font-weight="bold">
-                MAY 28, 2026
-            </text>
-            
-            <!-- Decorative Bottom Element -->
-            <circle cx="400" cy="615" r="4" fill="#a98f89"/>
-            <circle cx="400" cy="640" r="6" fill="#a98f89"/>
-            <path d="M 400 710 C 430 710, 440 685, 400 660 C 360 685, 370 710, 400 710 Z" fill="#5C2018" opacity="0.9"/>
-        </svg>
+<body id="main-body"
+    class="relative w-full flex flex-col font-serif text-brand selection:bg-brand selection:text-white overflow-hidden">
+
+    <div id="intro-overlay"
+        class="fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-1000 cursor-pointer">
+        <video id="intro-video" class="w-full h-full object-cover absolute inset-0 pointer-events-none" muted
+            playsinline preload="auto">
+            <source src="https://theatre-demo.thedigitalyes.com/assets/curtain-video-BAKLj3Y5.mp4" type="video/mp4">
+        </video>
+        <div id="tap-text"
+            class="relative z-20 flex flex-col items-center pointer-events-none transition-opacity duration-500">
+            <span
+                class="text-white/90 font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.2em] uppercase animate-pulse drop-shadow-lg">Tap
+                to open</span>
+        </div>
     </div>
 
-    <div class="instructions">
-        <h2>Your Wedding Logo</h2>
-        <p><strong>How to use this logo in your invitation:</strong></p>
-        <p>1. Take a screenshot of the logo above, crop it to a square, and save it to your device.<br>
-        2. Upload that image to a free image hosting site (or directly to your Vercel project assets).<br>
-        3. Replace the <code>https://mohanmeghanatemplate.vercel.app/assets/logo.jpeg</code> links in the <strong>&lt;head&gt;</strong> section of your main Wedding Invitation Canvas with your new link.</p>
+    <div class="relative w-full min-h-screen flex flex-col overflow-hidden bg-cover bg-center bg-no-repeat"
+        style="background-image: url('https://theatre-demo.thedigitalyes.com/assets/curtain-open-C9MqdT6G.jpg');">
+
+        <div class="absolute top-6 right-6 md:top-8 md:right-8 z-50">
+            <div id="lang-toggle"
+                class="glass-pill rounded-full px-4 py-2 flex items-center gap-3 text-xs tracking-widest font-semibold cursor-pointer select-none">
+                <span id="lang-en" class="transition-opacity duration-300">EN</span>
+                <span id="lang-it" class="opacity-40 transition-opacity duration-300">IT</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-6 md:bottom-8 md:left-8 z-50">
+            <div id="audio-toggle"
+                class="glass-pill w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center">
+                <svg id="icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="md:w-5 md:h-5">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+                <svg id="icon-playing" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:w-5 md:h-5">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+            </div>
+        </div>
+
+        <section
+            class="relative z-30 flex flex-col items-center justify-center text-center px-4 md:px-8 w-full max-w-6xl mx-auto flex-1 pt-[25vh] sm:pt-[30vh] md:pt-[35vh] pb-4">
+            <h3 class="hero-reveal text-[9px] sm:text-[13px] md:text-[16px] tracking-widest uppercase font-medium mb-2 md:mb-4 w-full max-w-[55%] sm:max-w-[85%] md:max-w-[95%] mx-auto leading-[1.8] sm:leading-relaxed">
+                You are cordially invited <br class="block sm:hidden" /> to celebrate the wedding of
+            </h3>
+            <div class="hero-reveal flex flex-col items-center justify-center py-2">
+                <h1 class="font-script text-[2.6rem] sm:text-[4rem] md:text-[5.5rem] leading-[1.1] capitalize">Nivetha</h1>
+                <span class="font-script text-xl md:text-4xl leading-none my-0.5">&</span>
+                <h1 class="font-script text-[2.6rem] sm:text-[4rem] md:text-[5.5rem] leading-[1.1] capitalize">KesavaRam</h1>
+            </div>
+            <p
+                class="hero-reveal text-[8.5px] sm:text-[12px] md:text-[15px] leading-[1.8] sm:leading-[2.5] tracking-widest uppercase font-medium w-full max-w-[55%] sm:max-w-[85%] md:max-w-[90%] mt-2 md:mt-6 mx-auto">
+                We would like to invite you <br class="block sm:hidden" /> to celebrate with us the <br class="block sm:hidden" /> most special day of our lives.<br class="block sm:hidden" /> 
+                <span class="block mt-1.5 sm:mt-0 sm:inline">It would be an honor to <br class="block sm:hidden" /> have you present at <br class="block sm:hidden" /> this important moment.</span>
+            </p>
+            <div class="hero-reveal mt-4 md:mt-16 flex flex-col items-center gap-2 cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
+                onclick="document.getElementById('parents-section').scrollIntoView({behavior: 'smooth'})">
+                <span class="text-[11px] sm:text-[13px] md:text-[15px] tracking-widest uppercase font-semibold">Scroll</span>
+                <span class="text-2xl md:text-3xl font-light animate-bounce-subtle mt-1">↓</span>
+            </div>
+        </section>
     </div>
 
+    <section id="parents-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-16 md:py-24 w-full mx-auto overflow-hidden">
+        <div class="flex flex-col items-center w-full max-w-4xl reveal-on-scroll">
+            <div class="flex flex-col items-center mb-6 md:mb-10">
+                <h2 class="font-script text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] leading-none mb-3 md:mb-4 capitalize">Nivetha</h2>
+                <p class="font-serif text-[12px] sm:text-[15px] md:text-[18px] tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-loose text-brand/90 font-medium">
+                    Daughter of Mr. K. Baskar<br>
+                    and Mrs. B. Padma Priya
+                </p>
+            </div>
+            
+            <span class="font-script text-3xl sm:text-4xl md:text-5xl leading-none mb-6 md:mb-10">&</span>
+            
+            <div class="flex flex-col items-center">
+                <h2 class="font-script text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] leading-none mb-3 md:mb-4 capitalize">KesavaRam</h2>
+                <p class="font-serif text-[12px] sm:text-[15px] md:text-[18px] tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-loose text-brand/90 font-medium">
+                    Son of Mr. G. Manivanan<br>
+                    and Mrs. P. Pangajam
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reveal-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-8 md:py-20 w-full mx-auto md:min-h-screen overflow-hidden">
+        <canvas id="confettiCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+        <div class="relative z-10 flex flex-col items-center w-full max-w-4xl">
+            <div id="instruction-header"
+                class="flex flex-col items-center mb-3 md:mb-6 fade-transition reveal-on-scroll">
+                <div
+                    class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-brand/20 bg-brand/5 flex items-center justify-center mb-2 md:mb-4">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" class="opacity-70 md:w-[22px] md:h-[22px]">
+                        <path d="M18 11V6a2 2 0 0 0-4 0v5"></path>
+                        <path d="M14 10V4a2 2 0 0 0-4 0v6"></path>
+                        <path d="M10 10.5V3a2 2 0 0 0-4 0v9"></path>
+                        <path d="M6 13.5V9a2 2 0 0 0-4 0v6c0 4.418 4.03 8 9 8h2c4.97 0 9-3.582 9-8v-3a2 2 0 0 0-4 0v3">
+                        </path>
+                    </svg>
+                </div>
+                <p class="text-[9px] md:text-[11.5px] font-medium opacity-60 tracking-wide">Scratch all three circles to
+                    continue</p>
+            </div>
+            <div class="flex flex-col items-center mb-4 md:mb-14 reveal-on-scroll delay-100">
+                <h2 class="font-script text-[3.5rem] sm:text-[4rem] md:text-[5rem] leading-none mb-2 md:mb-6">Reveal
+                </h2>
+                <h3 class="text-[12px] sm:text-[15px] md:text-[18px] tracking-[0.3em] uppercase font-bold text-brand">SCRATCH TO DISCOVER THE
+                    DATE</h3>
+            </div>
+            <div class="flex flex-row justify-center items-center gap-3 sm:gap-6 md:gap-10 reveal-on-scroll delay-200">
+                <div
+                    class="relative w-[90px] h-[90px] sm:w-[130px] sm:h-[130px] md:w-[160px] md:h-[160px] rounded-full bg-white scratch-container flex items-center justify-center">
+                    <span class="font-script text-3xl sm:text-5xl md:text-6xl font-medium tracking-wide">28</span>
+                    <canvas class="scratch-canvas absolute inset-0 w-full h-full rounded-full cursor-pointer z-10"
+                        id="scratch1"></canvas>
+                </div>
+                <div
+                    class="relative w-[90px] h-[90px] sm:w-[130px] sm:h-[130px] md:w-[160px] md:h-[160px] rounded-full bg-white scratch-container flex items-center justify-center">
+                    <span class="font-script text-3xl sm:text-5xl md:text-6xl font-medium tracking-wide">May</span>
+                    <canvas class="scratch-canvas absolute inset-0 w-full h-full rounded-full cursor-pointer z-10"
+                        id="scratch2"></canvas>
+                </div>
+                <div
+                    class="relative w-[90px] h-[90px] sm:w-[130px] sm:h-[130px] md:w-[160px] md:h-[160px] rounded-full bg-white scratch-container flex items-center justify-center">
+                    <span class="font-script text-3xl sm:text-5xl md:text-6xl font-medium tracking-wide">2026</span>
+                    <canvas class="scratch-canvas absolute inset-0 w-full h-full rounded-full cursor-pointer z-10"
+                        id="scratch3"></canvas>
+                </div>
+            </div>
+            <div id="success-text" class="mt-6 md:mt-16 fade-in-up flex flex-col items-center gap-4 md:gap-8">
+                <h2 class="font-script text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] leading-none">We're getting
+                    married!</h2>
+                <div class="flex flex-col items-center gap-2 cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
+                    onclick="document.getElementById('countdown-section').scrollIntoView({behavior: 'smooth'})">
+                    <span class="text-lg md:text-xl font-light animate-bounce-subtle">↓</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="countdown-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-8 md:py-20 w-full max-w-4xl mx-auto md:min-h-screen">
+        <div class="flex flex-col items-center mb-4 md:mb-16 reveal-on-scroll">
+            <h2 class="font-script text-[3.5rem] md:text-[5rem] leading-none mb-2 md:mb-6">Countdown</h2>
+        </div>
+        <div class="flex flex-row justify-center items-center gap-3 sm:gap-6 md:gap-8 reveal-on-scroll delay-100">
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px] border-[1.5px] border-brand/40 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 bg-white/50">
+                    <span id="cd-days" class="font-script text-3xl sm:text-5xl md:text-6xl font-medium">00</span>
+                </div>
+                <span class="text-[8px] md:text-[11px] tracking-[0.25em] uppercase font-medium">Days</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px] border-[1.5px] border-brand/40 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 bg-white/50">
+                    <span id="cd-hours" class="font-script text-3xl sm:text-5xl md:text-6xl font-medium">00</span>
+                </div>
+                <span class="text-[8px] md:text-[11px] tracking-[0.25em] uppercase font-medium">Hours</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px] border-[1.5px] border-brand/40 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 bg-white/50">
+                    <span id="cd-mins" class="font-script text-3xl sm:text-5xl md:text-6xl font-medium">00</span>
+                </div>
+                <span class="text-[8px] md:text-[11px] tracking-[0.25em] uppercase font-medium">Min</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px] border-[1.5px] border-brand/40 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-4 bg-white/50">
+                    <span id="cd-secs" class="font-script text-3xl sm:text-5xl md:text-6xl font-medium">00</span>
+                </div>
+                <span class="text-[8px] md:text-[11px] tracking-[0.25em] uppercase font-medium">Sec</span>
+            </div>
+        </div>
+        <div class="mt-4 md:mt-12 reveal-on-scroll delay-200">
+            <p class="text-[9px] md:text-[12px] font-medium tracking-wide">until the big day</p>
+        </div>
+    </section>
+
+    <section id="venue-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-8 pb-2 md:pt-20 md:pb-6 w-full max-w-5xl mx-auto">
+        <h3 class="text-[12px] sm:text-[15px] md:text-[18px] tracking-[0.25em] uppercase font-bold mb-4 md:mb-16 reveal-on-scroll text-brand">The
+            celebration will take place at</h3>
+        <div class="relative w-full max-w-3xl mx-auto mb-4 md:mb-12 reveal-on-scroll delay-100">
+            <img src="https://www.image2url.com/r2/default/files/1776064975660-38219d9f-880c-4fee-b1b2-59f585d94c51.jpg" 
+                alt="Marriage Venue Image" class="w-full h-auto max-h-[300px] sm:max-h-[450px] object-cover object-center rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-[6px] border-white bg-white/50" />
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 md:mb-6 reveal-on-scroll delay-200">
+            <a href="https://maps.google.com/?q=V.P.+Palace+A/C,+225,+Chennai+to+Banglore,+NH46,+Veppoor,+Arcot,+Vellore,+Tamil+Nadu+-+632+509" target="_blank" class="hover:opacity-80 transition-opacity">V.P. Palace A/C</a>
+        </h1>
+        <p class="text-[11px] sm:text-[14px] md:text-[18px] tracking-[0.2em] uppercase leading-[2.5] reveal-on-scroll delay-300 font-medium">
+            <a href="https://maps.google.com/?q=V.P.+Palace+A/C,+225,+Chennai+to+Banglore,+NH46,+Veppoor,+Arcot,+Vellore,+Tamil+Nadu+-+632+509" target="_blank" class="hover:underline">225, Chennai to Banglore, NH46, Veppoor,<br>Arcot, Vellore, Tamil Nadu - 632 509</a>
+        </p>
+        
+        <a href="https://maps.google.com/?q=V.P.+Palace+A/C,+225,+Chennai+to+Banglore,+NH46,+Veppoor,+Arcot,+Vellore,+Tamil+Nadu+-+632+509" target="_blank" class="mt-4 md:mt-6 px-6 py-2.5 bg-brand text-white rounded-full font-serif text-[10px] md:text-[13px] tracking-widest uppercase hover:bg-opacity-90 transition-all reveal-on-scroll delay-300 shadow-lg flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            View Map
+        </a>
+        
+        <div class="mt-8 md:mt-12 flex flex-col items-center gap-8 md:gap-12 w-full max-w-2xl reveal-on-scroll delay-400">
+            <div class="flex flex-col items-center gap-1.5 md:gap-2">
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl mb-2 font-bold text-brand">Wedding</h2>
+                <p class="font-serif text-[18px] sm:text-[22px] md:text-[26px] font-medium text-brand">On Thursday 28th May 2026</p>
+                <p class="font-serif italic text-[16px] sm:text-[18px] md:text-[22px] text-brand/90">from 7:30 a.m. to 9:00 a.m.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reception-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-2 md:py-6 w-full">
+        <div class="relative w-full max-w-[650px] mx-auto flex items-center justify-center reveal-on-scroll">
+            <img src="https://theatre-demo.thedigitalyes.com/assets/menu-frame-BFE5kCs7.png" alt="Reception Frame"
+                class="w-full h-auto mix-blend-multiply opacity-90" />
+            <div
+                class="absolute inset-0 flex flex-col items-center justify-center w-full h-full pt-[18%] pb-[26%] md:pt-[22%] md:pb-[30%] px-4 sm:px-16">
+                <div class="flex flex-col items-center justify-center h-full w-full gap-2.5 sm:gap-5 md:gap-7">
+                    
+                    <div class="flex flex-col items-center leading-tight">
+                        <h2 class="font-serif font-bold text-[22px] sm:text-[28px] md:text-[34px] uppercase text-brand mb-1">
+                            Reception
+                        </h2>
+                    </div>
+
+                    <div class="flex flex-col items-center leading-tight">
+                        <h3 class="text-[12px] sm:text-[16px] md:text-[18px] tracking-[0.25em] font-bold uppercase font-serif text-brand mb-0.5 md:mb-1">
+                            Date and Day
+                        </h3>
+                        <p class="font-serif text-[14px] sm:text-[18px] md:text-[22px] mb-0.5">27th May 2026, Wednesday</p>
+                    </div>
+
+                    <div class="flex flex-col items-center leading-tight">
+                        <h3 class="text-[12px] sm:text-[16px] md:text-[18px] tracking-[0.25em] font-bold uppercase font-serif text-brand mb-0.5 md:mb-1">
+                            Time
+                        </h3>
+                        <p class="font-serif text-[14px] sm:text-[18px] md:text-[22px] mb-0.5">7:00 p.m. onwards</p>
+                    </div>
+
+                    <div class="flex flex-col items-center leading-tight">
+                        <h3 class="text-[12px] sm:text-[16px] md:text-[18px] tracking-[0.25em] font-bold uppercase font-serif text-brand mb-0.5 md:mb-1">
+                            Venue
+                        </h3>
+                        <p class="font-serif text-[13px] sm:text-[18px] md:text-[22px] mb-0.5 px-2 sm:px-4 text-center leading-snug">
+                            <a href="https://maps.google.com/?q=V.P.+Palace+A/C,+225,+Chennai+to+Banglore,+NH46,+Veppoor,+Arcot,+Vellore,+Tamil+Nadu+-+632+509" target="_blank" class="hover:underline">V.P. Palace A/C, 225, NH46, Veppoor, Arcot, Vellore</a>
+                        </p>
+                        <a href="https://maps.google.com/?q=V.P.+Palace+A/C,+225,+Chennai+to+Banglore,+NH46,+Veppoor,+Arcot,+Vellore,+Tamil+Nadu+-+632+509" target="_blank" class="mt-2 sm:mt-3 px-5 sm:px-6 py-2 sm:py-2.5 border-[1.5px] border-brand text-brand rounded-full font-serif font-bold text-[10px] sm:text-[12px] md:text-[14px] tracking-widest uppercase hover:bg-brand hover:text-white transition-all flex items-center gap-1.5 sm:gap-2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sm:w-[16px] sm:h-[16px]"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            View Map
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="transport-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-8 md:py-16 w-full max-w-4xl mx-auto md:min-h-[50vh]">
+        <div class="bg-[#FCFBF9] border border-brand/15 shadow-[0_4px_25px_rgb(0,0,0,0.04)] rounded-3xl p-6 sm:p-10 md:p-16 w-full max-w-3xl flex flex-col items-center gap-4 reveal-on-scroll">
+            <h3 class="text-[10px] md:text-[12px] tracking-[0.25em] uppercase font-medium mb-1">Transport</h3>
+            <h2 class="font-serif text-[2.5rem] sm:text-[3.8rem] md:text-[4.5rem] leading-none mb-3 md:mb-6 text-brand">
+                Travel Convenience
+            </h2>
+            <p class="font-serif text-[14px] sm:text-[16px] md:text-[18px] leading-relaxed max-w-xl mx-auto text-brand/90">
+                Transportation arrangements are available from the bride's and groom's residences for the convenience of our guests.
+            </p>
+        </div>
+    </section>
+
+    <section id="compliments-section"
+        class="relative z-10 flex flex-col items-center justify-center text-center px-4 py-8 md:py-16 w-full max-w-4xl mx-auto">
+        <div class="bg-brand/5 border border-brand/20 rounded-3xl p-8 sm:p-12 md:p-16 w-full max-w-2xl flex flex-col items-center gap-6 reveal-on-scroll">
+            <h2 class="font-script text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] leading-none mb-2 text-brand">
+                With Best Compliments From
+            </h2>
+            <div class="font-serif text-[18px] sm:text-[22px] md:text-[26px] leading-relaxed text-brand/90 flex flex-col gap-2 font-medium">
+                <p>B. Dinesh Kumar</p>
+                <p>M. Hari Srinivasan</p>
+                <p>H. Kamatchi</p>
+                <p>H. Larmikha (a) Chinnu</p>
+                <p class="font-bold mt-3 text-[20px] sm:text-[24px] md:text-[28px] text-brand">Friends & Relatives</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="thankyou-section"
+        class="relative z-10 flex flex-col items-center justify-center px-4 pt-2 pb-12 md:pt-6 md:pb-20 w-full max-w-4xl mx-auto">
+        <div
+            class="relative w-full max-w-[550px] aspect-[5/4] sm:aspect-[4/3] bg-brand p-4 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl flex items-center justify-center overflow-hidden reveal-on-scroll">
+            <div
+                class="relative bg-white w-full h-full flex flex-col items-center justify-center text-center p-4 md:p-10 scallop-border">
+                <h2 class="font-script text-[2.5rem] md:text-[4rem] leading-none mb-2 md:mb-6 text-brand">Thank You</h2>
+                <p
+                    class="font-serif text-[16px] sm:text-[18px] md:text-[22px] leading-relaxed mb-3 md:mb-8 text-brand opacity-90 max-w-[400px]">
+                    For joining us on this special day. Your presence is the best gift we could receive.
+                </p>
+                <h3 class="font-script text-[2.2rem] sm:text-[2.8rem] md:text-[3.5rem] leading-none text-brand capitalize">Nivetha & KesavaRam</h3>
+            </div>
+        </div>
+    </section>
+
+    <audio id="bg-music" loop preload="auto" autoplay>
+        <source src="https://theatre-demo.thedigitalyes.com/assets/intro-music-CzqJOUtA.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* --- INTRO VIDEO LOGIC & ANIMATION --- */
+            const introOverlay = document.getElementById('intro-overlay');
+            const introVideo = document.getElementById('intro-video');
+            const mainBody = document.getElementById('main-body');
+            const tapText = document.getElementById('tap-text');
+            let introStarted = false;
+
+            function triggerHeroReveal(delay) {
+                setTimeout(() => {
+                    document.querySelectorAll('.hero-reveal').forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('is-visible');
+                        }, index * 250); // Staggered delay for each element
+                    });
+                }, delay);
+            }
+
+            function closeIntro() {
+                if (!introOverlay) return;
+                introOverlay.style.opacity = '0';
+                mainBody.classList.remove('overflow-hidden');
+                setTimeout(() => {
+                    if (introOverlay.parentNode) {
+                        introOverlay.parentNode.removeChild(introOverlay);
+                    }
+                }, 1000);
+            }
+
+            function startIntro() {
+                if (introStarted) return;
+                introStarted = true;
+
+                if (tapText) {
+                    tapText.style.opacity = '0';
+                }
+
+                if (introVideo) {
+                    introVideo.play().then(() => {
+                        // Wait exactly for the curtains to start parting in the video (around 800ms)
+                        triggerHeroReveal(800); 
+                    }).catch(e => {
+                        console.log("Play blocked:", e);
+                        closeIntro(); 
+                        triggerHeroReveal(0); // Reveal immediately if video playback fails
+                    });
+                } else {
+                    closeIntro();
+                    triggerHeroReveal(0);
+                }
+
+                // Allow a second tap to skip the video while it's playing
+                introOverlay.removeEventListener('click', startIntro);
+                introOverlay.addEventListener('click', closeIntro);
+            }
+
+            if (introVideo) {
+                // When video finishes, fade it out
+                introVideo.addEventListener('ended', closeIntro);
+            }
+
+            // Wait for user interaction to play the video
+            if (introOverlay) {
+                introOverlay.addEventListener('click', startIntro);
+            }
+
+            /* --- SCROLL ANIMATIONS LOGIC --- */
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            /* --- LANGUAGE TOGGLE LOGIC --- */
+            const langToggle = document.getElementById('lang-toggle');
+            const langEn = document.getElementById('lang-en');
+            const langIt = document.getElementById('lang-it');
+            let currentLang = 'EN';
+
+            langToggle.addEventListener('click', () => {
+                if (currentLang === 'EN') {
+                    currentLang = 'IT';
+                    langEn.classList.add('opacity-40');
+                    langIt.classList.remove('opacity-40');
+                } else {
+                    currentLang = 'EN';
+                    langEn.classList.remove('opacity-40');
+                    langIt.classList.add('opacity-40');
+                }
+            });
+
+            /* --- AUDIO LOGIC --- */
+            const audio = document.getElementById('bg-music');
+            const audioToggle = document.getElementById('audio-toggle');
+            const iconMuted = document.getElementById('icon-muted');
+            const iconPlaying = document.getElementById('icon-playing');
+            let isPlaying = false;
+
+            function toggleAudio(e) {
+                if (e) e.stopPropagation();
+                if (isPlaying) {
+                    audio.pause();
+                    iconPlaying.classList.add('hidden');
+                    iconMuted.classList.remove('hidden');
+                } else {
+                    audio.play().then(() => {
+                        iconMuted.classList.add('hidden');
+                        iconPlaying.classList.remove('hidden');
+                    }).catch(console.error);
+                }
+                isPlaying = !isPlaying;
+            }
+
+            audioToggle.addEventListener('click', toggleAudio);
+
+            const startAudioOnInteraction = () => {
+                if (!isPlaying) {
+                    audio.play().then(() => {
+                        isPlaying = true;
+                        iconMuted.classList.add('hidden');
+                        iconPlaying.classList.remove('hidden');
+                    }).catch(e => {
+                        console.log("Audio play prevented by browser:", e);
+                    });
+                }
+                document.removeEventListener('click', startAudioOnInteraction);
+                document.removeEventListener('touchstart', startAudioOnInteraction);
+                document.removeEventListener('scroll', startAudioOnInteraction);
+            };
+
+            document.addEventListener('click', startAudioOnInteraction);
+            document.addEventListener('touchstart', startAudioOnInteraction, { passive: true });
+            document.addEventListener('scroll', startAudioOnInteraction, { passive: true });
+
+            /* --- SCRATCH LOGIC --- */
+            let completedCards = 0;
+            const totalCards = 3;
+            let isGlobalComplete = false;
+
+            function initScratchCard(canvasId) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                // Ensure size adapts better to very narrow screens without overlapping
+                const size = rect.width > 0 ? rect.width : (window.innerWidth < 400 ? 90 : (window.innerWidth < 640 ? 100 : (window.innerWidth < 768 ? 130 : 160)));
+                canvas.width = size * dpr;
+                canvas.height = size * dpr;
+                ctx.scale(dpr, dpr);
+                const cx = size / 2;
+                const cy = size / 2;
+                const gradient = ctx.createConicGradient(Math.PI / 4, cx, cy);
+                gradient.addColorStop(0, '#e5c07b');
+                gradient.addColorStop(0.2, '#fef4cc');
+                gradient.addColorStop(0.4, '#c2944b');
+                gradient.addColorStop(0.6, '#e5c07b');
+                gradient.addColorStop(0.8, '#fef4cc');
+                gradient.addColorStop(1, '#e5c07b');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+                let isDrawing = false;
+                let isCardComplete = false;
+                function getMousePos(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    return { x: clientX - rect.left, y: clientY - rect.top };
+                }
+                function scratch(e) {
+                    if (!isDrawing || isCardComplete) return;
+                    e.preventDefault();
+                    const pos = getMousePos(e);
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.lineJoin = 'round';
+                    ctx.lineCap = 'round';
+                    const brushSize = size * 0.15;
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, brushSize, 0, Math.PI * 2);
+                    ctx.fill();
+                    checkCompletion();
+                }
+                function startScratch(e) { isDrawing = true; scratch(e); }
+                function endScratch() { isDrawing = false; }
+                canvas.addEventListener('mousedown', startScratch);
+                canvas.addEventListener('mousemove', scratch);
+                canvas.addEventListener('mouseup', endScratch);
+                canvas.addEventListener('mouseleave', endScratch);
+                canvas.addEventListener('touchstart', startScratch, { passive: false });
+                canvas.addEventListener('touchmove', scratch, { passive: false });
+                canvas.addEventListener('touchend', endScratch);
+                function checkCompletion() {
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const pixels = imageData.data;
+                    let transparentCount = 0;
+                    let totalChecked = 0;
+                    for (let i = 3; i < pixels.length; i += 40) {
+                        if (pixels[i] < 128) transparentCount++;
+                        totalChecked++;
+                    }
+                    const percentScratched = (transparentCount / totalChecked) * 100;
+                    if (percentScratched > 45 && !isCardComplete) {
+                        isCardComplete = true;
+                        canvas.style.opacity = '0';
+                        setTimeout(() => { canvas.style.display = 'none'; }, 500);
+                        completedCards++;
+                        if (completedCards === totalCards && !isGlobalComplete) {
+                            isGlobalComplete = true;
+                            onAllScratched();
+                        }
+                    }
+                }
+            }
+            setTimeout(() => {
+                initScratchCard('scratch1');
+                initScratchCard('scratch2');
+                initScratchCard('scratch3');
+            }, 100);
+
+            function onAllScratched() {
+                document.getElementById('instruction-header').classList.add('fade-out');
+                document.getElementById('success-text').classList.add('visible');
+                startConfetti();
+            }
+
+            const confettiCanvas = document.getElementById('confettiCanvas');
+            const revealSection = document.getElementById('reveal-section');
+            const cCtx = confettiCanvas.getContext('2d');
+            let particles = [];
+            function startConfetti() {
+                resizeConfettiCanvas();
+                window.addEventListener('resize', resizeConfettiCanvas);
+                for (let i = 0; i < 150; i++) {
+                    particles.push({
+                        x: Math.random() * confettiCanvas.width,
+                        y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                        r: Math.random() * 4 + 2,
+                        w: Math.random() * 12 + 6,
+                        h: Math.random() * 6 + 3,
+                        dx: Math.random() * 2 - 1,
+                        dy: Math.random() * 2 + 2,
+                        tiltAngle: 0,
+                        tiltAngleIncrement: (Math.random() * 0.07) + 0.05,
+                        type: Math.random() > 0.5 ? 'circle' : 'rect',
+                        color: 'rgb(92, 32, 24)'
+                    });
+                }
+                animateConfetti();
+            }
+            function resizeConfettiCanvas() {
+                confettiCanvas.width = revealSection.offsetWidth;
+                confettiCanvas.height = revealSection.offsetHeight;
+            }
+            function animateConfetti() {
+                requestAnimationFrame(animateConfetti);
+                cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.tiltAngle += p.tiltAngleIncrement;
+                    p.y += p.dy;
+                    p.x += p.dx + Math.sin(p.tiltAngle) * 0.5;
+                    cCtx.fillStyle = p.color;
+                    if (p.type === 'circle') {
+                        cCtx.beginPath();
+                        cCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        cCtx.fill();
+                    } else {
+                        cCtx.save();
+                        cCtx.translate(p.x, p.y);
+                        cCtx.rotate(p.tiltAngle);
+                        cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                        cCtx.restore();
+                    }
+                    if (p.y > confettiCanvas.height) {
+                        p.x = Math.random() * confettiCanvas.width;
+                        p.y = -20;
+                    }
+                }
+            }
+
+            function initCountdown() {
+                const targetDate = new Date("May 28, 2026 00:00:00").getTime();
+                function update() {
+                    const now = new Date().getTime();
+                    const dist = targetDate - now;
+                    if (dist < 0) return;
+                    document.getElementById('cd-days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    document.getElementById('cd-hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    document.getElementById('cd-mins').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById('cd-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                }
+                update();
+                setInterval(update, 1000);
+            }
+            initCountdown();
+
+        });
+    </script>
+<script src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" xintegrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"dbb40e3b27694109914698e84f8a92c5","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
+
 </html>
